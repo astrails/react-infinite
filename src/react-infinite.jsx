@@ -198,7 +198,7 @@ var Infinite = React.createClass({
     });
   },
 
-  handleScroll(scrollTop) {
+  doHandleScroll(scrollTop) {
     this.manageScrollTimeouts();
     this.setStateFromScrollTop(scrollTop);
     var infiniteScrollBottomLimit = scrollTop >
@@ -211,6 +211,13 @@ var Infinite = React.createClass({
       });
       this.props.onInfiniteLoad();
     }
+  },
+
+  handleScroll(scrollTop) {
+    var that = this;
+    setTimeout(function() {
+      that.doHandleScroll(scrollTop)
+    }, 200);
   },
 
   // Helpers for React styles.
